@@ -20,7 +20,7 @@
           <div class="form-group">
             <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
           </div>
-          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">Login</b-button>
+          <b-button type="submit" size="sm" class="auth-btn mb-3 " variant="inverse">Login</b-button>
           <p class="widget-auth-info">or sign in with</p>
           <div class="social-buttons">
             <b-button variant="primary" class="social-button mb-2">
