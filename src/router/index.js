@@ -4,16 +4,22 @@ import Home from '../views/Home'
 import Dashboard from '../views/Dashboard'
 import Candidates from '../views/Candidates'
 import SocialCauses from '../views/SocialCauses'
+import HelloWorld from '../components/HelloWorld'
 
 Vue.use(VueRouter)
 
 const routes = [{
         path: '/',
-        component: Home,
+        component: HelloWorld,
         props: true
     },
     {
         path: '/:id',
+        component: Home,
+        props: true
+    },
+    {
+        path: '/:id/dashboard',
         component: Dashboard,
         meta: {
             requiresAuth: true

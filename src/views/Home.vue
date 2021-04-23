@@ -61,10 +61,11 @@ export default {
       const email = this.$refs.email.value;
       const password = this.$refs.password.value;
 
+      console.log({email, password})
     },
   },
   created() {
-    
+    console.log(`url: ${this.$route.params.id}`)
   },
 };
 </script>
