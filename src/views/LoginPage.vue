@@ -68,11 +68,11 @@ export default {
   },
   created() {
     let companyId = this.$route.params.id;
-    var docRef = companiesCollection.doc(companyId)
+    var docRef = companiesCollection.doc(companyId);
     docRef.get().then((doc) => {
         if (doc.exists) {
-            this.$store.dispatch('assignCompany', doc.data())
             console.log("Document data:", doc.data());
+            this.$store.dispatch('assignCompany', companyId);
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");

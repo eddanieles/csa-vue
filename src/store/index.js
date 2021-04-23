@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-import layout from './layout';
+import layout from './layout'
 import * as fb from '../firebase'
 import router from '../router/index'
 
@@ -13,20 +13,20 @@ export default new Vuex.Store({
     },
     state: {
         userProfile: {},
-        company: {}
+        company: ""
     },
     mutations: {
         setUserProfile(state, val) {
             state.userProfile = val
         },
-        setCompany(state, val) {
-            state.company = val
+        setCompanyId(state, val) {
+            state.companyId = val
         }
     },
     actions: {
-        async assignCompany({ commit }, companyObj) {
+        async assignCompany({ commit }, companyId) {
             // set companyID in state
-            commit('setCompany', companyObj)
+            commit('setCompanyId', companyId)
         },
         async login({ dispatch }, form) {
             // sign user in
@@ -43,8 +43,8 @@ export default new Vuex.Store({
             // commit('setUserProfile', userProfile.data())
 
             // change route to dashboard
-            console.log(user.uid)
-            router.push(`/${this.state.company}/dashboard`)
+            console.log(`User UID: ${user.uid}`)
+            router.push(`/${this.state.companyId}/dashboard`)
         },
         async logout({ commit }) {
             // log user out

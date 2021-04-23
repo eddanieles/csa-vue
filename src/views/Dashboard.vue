@@ -16,7 +16,7 @@ export default {
 
     },
     mounted() {
-        console.log(this.$store.state.company)
+        console.log(`Current Company State: ${this.$store.state.companyId}`)
     },
 }
 </script>
