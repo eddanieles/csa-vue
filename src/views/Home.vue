@@ -58,14 +58,15 @@ export default {
   },
   methods: {
     login() {
-      const email = this.$refs.email.value;
-      const password = this.$refs.password.value;
-
-      console.log({email, password})
+      let that = this;
+      this.$store.dispatch('login', {
+          email: that.$refs.email.value,
+          password: that.$refs.password.value
+      })
     },
   },
   created() {
-    console.log(`url: ${this.$route.params.id}`)
+    this.$store.dispatch('assignCompany', this.$route.params.id)
   },
 };
 </script>
