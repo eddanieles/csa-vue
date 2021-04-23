@@ -61,16 +61,10 @@ export default {
       const email = this.$refs.email.value;
       const password = this.$refs.password.value;
 
-      if (email.length !== 0 && password.length !== 0) {
-        window.localStorage.setItem('authenticated', true);
-        this.$router.push('/app/dashboard');
-      }
     },
   },
   created() {
-    if (window.localStorage.getItem('authenticated') === 'true') {
-      this.$router.push('/app/main/analytics');
-    }
+    
   },
 };
 </script>
