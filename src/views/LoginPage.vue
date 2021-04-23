@@ -47,6 +47,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
+import { companiesCollection } from '@/firebase';
 
 export default {
   name: 'LoginPage',
@@ -66,7 +67,19 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('assignCompany', this.$route.params.id)
+    let companyId = this.$route.params.id;
+    var docRef = companiesCollection.doc(companyId)
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            this.$store.dispatch('assignCompany', doc.data())
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
   },
 };
 </script>
