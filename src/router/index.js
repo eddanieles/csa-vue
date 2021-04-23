@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home'
+import LoginPage from '../views/LoginPage'
 import Dashboard from '../views/Dashboard'
 import Candidates from '../views/Candidates'
 import SocialCauses from '../views/SocialCauses'
@@ -15,7 +15,7 @@ const routes = [{
     },
     {
         path: '/:id',
-        component: Home,
+        component: LoginPage,
         props: true
     },
     {
