@@ -13,7 +13,7 @@ export default new Vuex.Store({
     },
     state: {
         userProfile: {},
-        company: ""
+        company: {}
     },
     mutations: {
         setUserProfile(state, val) {
@@ -24,9 +24,9 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async assignCompany({ commit }, companyID) {
+        async assignCompany({ commit }, companyObj) {
             // set companyID in state
-            commit('setCompany', companyID)
+            commit('setCompany', companyObj)
         },
         async login({ dispatch }, form) {
             // sign user in
