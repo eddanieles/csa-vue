@@ -18,13 +18,13 @@ const db = firebase.firestore()
 const auth = firebase.auth()
 
 // collection references
-// const usersCollection = db.collection('users')
+const usersCollection = db.collection('users')
 const companiesCollection = db.collection('companies')
 
 // export utils/refs
 export {
     db,
     auth,
-    // usersCollection,
+    usersCollection,
     companiesCollection
 }

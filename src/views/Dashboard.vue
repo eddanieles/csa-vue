@@ -16,6 +16,7 @@ export default {
 
     },
     mounted() {
+        // eslint-disable-next-line
         console.log(`Current Company State: ${this.$store.state.companyId}`)
     },
 }

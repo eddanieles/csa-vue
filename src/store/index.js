@@ -36,13 +36,14 @@ export default new Vuex.Store({
             dispatch('fetchUserProfile', user)
         },
         async fetchUserProfile({ commit }, user) {
-            // // fetch user profile
-            // const userProfile = await fb.usersCollection.doc(user.uid).get()
+            // fetch user profile
+            const userProfile = await fb.usersCollection.doc(user.uid).get()
 
-            // // set user profile in state
-            // commit('setUserProfile', userProfile.data())
+            // set user profile in state
+            commit('setUserProfile', userProfile.data())
 
             // change route to dashboard
+            // eslint-disable-next-line
             console.log(`User UID: ${user.uid}`)
             router.push(`/${this.state.companyId}/dashboard`)
         },

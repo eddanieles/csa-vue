@@ -75,6 +75,7 @@ export default {
             this.$store.dispatch('assignCompany', companyId);
         } else {
             // doc.data() will be undefined in this case
+            // eslint-disable-next-line
             console.log("No such document!");
         }
     }).catch((error) => {
