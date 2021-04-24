@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard'
 import Candidates from '../views/Candidates'
 import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
+import Layout from '../components/Layout/Layout'
 
 Vue.use(VueRouter)
 
@@ -19,22 +20,28 @@ const routes = [{
         props: true
     },
     {
-        path: '/:id/dashboard',
-        component: Dashboard,
-        meta: {
-            requiresAuth: true
-        }
-    },
-    {
-        path: '/:id/candidates',
-        component: Candidates,
-        meta: {
-            requiresAuth: true
-        }
-    },
-    {
-        path: '/:id/socialcauses/',
-        component: SocialCauses
+        path: '/:id/app',
+        name: Layout,
+        component: Layout,
+        children: [{
+                path: 'dashboard',
+                component: Dashboard,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            {
+                path: 'candidates',
+                component: Candidates,
+                meta: {
+                    requiresAuth: true
+                }
+            },
+            {
+                path: 'socialcauses',
+                component: SocialCauses
+            }
+        ]
     }
 ]
 

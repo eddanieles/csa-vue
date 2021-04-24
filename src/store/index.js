@@ -45,7 +45,7 @@ export default new Vuex.Store({
             // change route to dashboard
             // eslint-disable-next-line
             console.log(`User UID: ${user.uid}`)
-            router.push(`/${this.state.companyId}/dashboard`)
+            router.push(`/${this.state.companyId}/app/dashboard`)
         },
         async logout({ commit }) {
             // log user out
