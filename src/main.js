@@ -7,10 +7,12 @@ import store from './store';
 import Widget from './components/Widget/Widget';
 import layoutMixin from './mixins/layout';
 import BootstrapVue from 'bootstrap-vue';
+import Trend from 'vuetrend';
 
 Vue.component('Widget', Widget);
 Vue.mixin(layoutMixin);
 Vue.use(BootstrapVue);
+Vue.use(Trend);
 
 Vue.config.productionTip = false
 
