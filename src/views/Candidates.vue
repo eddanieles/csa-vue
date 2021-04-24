@@ -1,8 +1,6 @@
 <template>
   <div class="dashboard-page">
     <h1 class="page-title">Candidates</h1>
-    <button @click="logout()">Logout</button>
-    
     <b-row>
         <b-col xs="12">
           <Widget
@@ -70,9 +68,7 @@ export default {
         };
     },
     methods: {
-        logout() {
-            this.$store.dispatch('logout')
-        }
+      
     }
 }
 </script>

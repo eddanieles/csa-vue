@@ -1,8 +1,6 @@
 <template>
   <div class="dashboard-page">
     <h1 class="page-title">Dashboard</h1>
-    <button @click="logout()">Logout</button>
-
     <b-row>
       <b-col md="6" xl="3" sm="6" xs="12">
         <div class="pb-xlg h-100">
@@ -137,9 +135,6 @@ export default {
         };
     },
     methods: {
-        logout() {
-            this.$store.dispatch('logout')
-        },
         getRandomData() {
             const arr = [];
 
