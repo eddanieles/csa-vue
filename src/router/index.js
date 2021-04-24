@@ -34,10 +34,7 @@ const routes = [{
     },
     {
         path: '/:id/socialcauses/',
-        component: SocialCauses,
-        meta: {
-            requiresAuth: true
-        }
+        component: SocialCauses
     }
 ]
 
