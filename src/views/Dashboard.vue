@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { auth } from '../firebase'
+
 export default {
     name: 'Dashboard',
     data() {
@@ -17,8 +19,13 @@ export default {
     },
     mounted() {
         // eslint-disable-next-line
-        console.log(`Current Company State: ${this.$store.state.companyId}`)
+        console.log(`Dashboard Company State: ${this.$store.state.companyId}`);
+        // eslint-disable-next-line
+        console.log(`Dashboard User State: ${JSON.stringify(this.$store.state.userProfile)}`);
+        // eslint-disable-next-line
+        console.log(`Dashboard auth.currentUser: ${JSON.stringify(auth.currentUser)}`)
     },
+
 }
 </script>
 
