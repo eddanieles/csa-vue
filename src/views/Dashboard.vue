@@ -1,6 +1,7 @@
 <template>
   <div>
       <h1>Dashboard</h1>
+      <button @click="logout()">Logout</button>
   </div>
 </template>
 
@@ -15,7 +16,9 @@ export default {
         };
     },
     methods: {
-
+        logout() {
+            this.$store.dispatch('logout')
+        }
     },
     mounted() {
         // eslint-disable-next-line

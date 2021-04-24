@@ -13,7 +13,7 @@ export default new Vuex.Store({
     },
     state: {
         userProfile: {},
-        company: ""
+        companyId: ""
     },
     mutations: {
         setUserProfile(state, val) {
@@ -55,7 +55,7 @@ export default new Vuex.Store({
             commit('setUserProfile', {})
 
             // redirect to login view
-            router.push('/login')
+            router.push(`/${this.state.companyId}`)
         }
     }
 });
