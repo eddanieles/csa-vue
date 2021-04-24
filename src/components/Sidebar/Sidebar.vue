@@ -15,7 +15,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Dashboard"
-            link="/app/dashboard"
+            :link="`/${this.path}/dashboard`"
             iconName="flaticon-database"
             index="dashboard"
             isHeader
@@ -23,7 +23,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Candidates"
-            link="/app/candidates"
+            :link="`/${this.path}/candidates`"
             iconName="flaticon-user"
             index="typography"
             isHeader
@@ -31,7 +31,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Social Causes"
-            link="/app/socialcauses"
+            :link="`/${this.path}/socialcauses`"
             iconName="flaticon-megaphone"
             index="tables"
             isHeader
@@ -51,7 +51,7 @@ export default {
   components: { NavLink },
   data() {
     return {
-
+      path: ""
     };
   },
   methods: {
@@ -76,6 +76,9 @@ export default {
   },
   created() {
     this.setActiveByRoute();
+    let path = this.$route.fullPath.split('/');
+    path.pop();
+    this.path = path.join('/');
   },
   computed: {
     ...mapState('layout', {
