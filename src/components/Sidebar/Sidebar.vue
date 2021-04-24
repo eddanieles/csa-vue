@@ -25,7 +25,7 @@
             header="Candidates"
             :link="`/${this.path}/candidates`"
             iconName="flaticon-user"
-            index="typography"
+            index="candidates"
             isHeader
         />
         <NavLink
@@ -33,7 +33,7 @@
             header="Social Causes"
             :link="`/${this.path}/socialcauses`"
             iconName="flaticon-megaphone"
-            index="tables"
+            index="socialcauses"
             isHeader
         />
       </ul>
