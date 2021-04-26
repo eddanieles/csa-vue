@@ -30,7 +30,7 @@ export default new Vuex.Store({
     actions: {
         async assignCompany({ commit }, companyId) {
             // fetch company
-            var companyRef = await fb.companiesCollection.doc(companyId)
+            var companyRef = fb.companiesCollection.doc(companyId)
 
             companyRef.get()
                 .then((company) => {
@@ -67,7 +67,7 @@ export default new Vuex.Store({
             commit('setUserProfile', userProfile.data())
 
             // change route to dashboard
-            router.push(`/${this.state.companyId}/app/dashboard`)
+            router.push(`/${userProfile.data().company}/app/dashboard`)
         },
         async getAuthUserProfile({ commit }, user) {
             // fetch user profile
