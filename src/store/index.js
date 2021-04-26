@@ -13,7 +13,8 @@ export default new Vuex.Store({
     },
     state: {
         userProfile: {},
-        companyId: ""
+        companyId: "",
+        companyProfile: {}
     },
     mutations: {
         setUserProfile(state, val) {
@@ -21,12 +22,35 @@ export default new Vuex.Store({
         },
         setCompanyId(state, val) {
             state.companyId = val
+        },
+        setCompanyProfile(state, val) {
+            state.companyProfile = val
         }
     },
     actions: {
         async assignCompany({ commit }, companyId) {
-            // set companyID in state
-            commit('setCompanyId', companyId)
+            // fetch company
+            var companyRef = await fb.companiesCollection.doc(companyId)
+
+            companyRef.get()
+                .then((company) => {
+                    if (company.exists) {
+                        commit('setCompanyProfile', company.data())
+                            // set companyID in state
+                        commit('setCompanyId', companyId)
+                    } else {
+                        // doc.data() will be undefined in this case
+                        commit('setCompanyProfile', null)
+                            // eslint-disable-next-line
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    // eslint-disable-next-line
+                    console.log("Error getting document:", error);
+                });
+
+
+
         },
         async login({ dispatch }, form) {
             // sign user in
