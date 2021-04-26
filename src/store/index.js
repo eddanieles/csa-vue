@@ -47,6 +47,26 @@ export default new Vuex.Store({
             console.log(`User UID: ${user.uid}`)
             router.push(`/${this.state.companyId}/app/dashboard`)
         },
+        async getAuthUserProfile({}, user) {
+            // eslint-disable-next-line
+            console.log("auth.currentUser from usersCollection: ")
+            var authRef = fb.usersCollection.doc(user.uid)
+
+            // fetch user profile
+            authRef.get()
+                .then((doc) => {
+                    if (doc.exists) {
+                        // eslint-disable-next-line
+                        console.log("Document data:", doc.data());
+                    } else {
+                        // doc.data() will be undefined in this case
+                        // eslint-disable-next-line
+                        console.log("No such document!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                });
+        },
         async logout({ commit }) {
             // log user out
             await fb.auth.signOut()
