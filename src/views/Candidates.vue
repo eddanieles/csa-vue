@@ -4,7 +4,6 @@
     <b-row>
         <b-col xs="12">
           <Widget
-            title="<h5>Support <span class='fw-semi-bold'>Requests</span></h5>"
             bodyClass="widget-table-overflow"
             customHeader
           >
@@ -69,6 +68,10 @@ export default {
     },
     methods: {
       
+    },
+    beforeCreate() {
+      let companyId = this.$route.params.id;
+      this.$store.dispatch('assignCompany', companyId);
     }
 }
 </script>
