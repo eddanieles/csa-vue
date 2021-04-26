@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-page">
-    {{this.reviews.map(data => data)}}
+    {{this.$store.state.companyReviews}}
     <h1 class="page-title">Candidates</h1>
     <b-row>
         <b-col xs="12">
@@ -55,7 +55,6 @@
 <script>
 import Widget from '@/components/Widget/Widget';
 import mock from './mock';
-import { reviewsCollection, candidatesCollection } from '@/firebase'
 
 export default {
     name: 'Candidates',
@@ -70,29 +69,13 @@ export default {
         };
     },
     methods: {
-      async getReviews() {
-          let that = this;
-          let cachedReview;
-          var reviewsRef = await reviewsCollection.where('company', '==', this.$route.params.id).get();
-          reviewsRef.docs.forEach(review => {
-              cachedReview = review.data();
-              var candidateRef = candidatesCollection.doc(review.data().candidate)
-              candidateRef.get().then((candidate) => {
-                  cachedReview.candidateInfo = candidate.data();
-              })
-              that.reviews.push(cachedReview)
-          });
-      // eslint-disable-next-line
-      console.log(that.reviews);
-      }
     },
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
     },
     beforeMount () {
-      // this.$store.dispatch('getReviews', this.$route.params.id);
-      this.getReviews()
+      this.$store.dispatch('getReviews', this.$route.params.id);
     }
 }
 </script>
