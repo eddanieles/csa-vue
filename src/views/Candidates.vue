@@ -74,16 +74,16 @@ export default {
           let that = this;
           let cachedReview;
           var reviewsRef = await reviewsCollection.where('company', '==', this.$route.params.id).get();
-          reviewsRef.docs.map(async review => {
+          reviewsRef.docs.forEach(review => {
               cachedReview = review.data();
-              var candidateRef = await candidatesCollection.doc(review.data().candidate)
+              var candidateRef = candidatesCollection.doc(review.data().candidate)
               candidateRef.get().then((candidate) => {
                   cachedReview.candidateInfo = candidate.data();
-                  // // eslint-disable-next-line
-                  // console.log(cachedReview);
               })
               that.reviews.push(cachedReview)
           });
+      // eslint-disable-next-line
+      console.log(that.reviews);
       }
     },
     beforeCreate() {
