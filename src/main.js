@@ -18,16 +18,6 @@ Vue.use(VueTouch);
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-    const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-
-    if (requiresAuth && !auth.currentUser) {
-        next('/')
-    } else {
-        next()
-    }
-})
-
 let app
 auth.onAuthStateChanged(() => {
     if (!app) {
