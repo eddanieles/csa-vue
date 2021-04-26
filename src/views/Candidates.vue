@@ -72,6 +72,12 @@ export default {
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
+    },
+    mounted () {
+      this.$store.dispatch('getReviews', this.$route.params.id);
+
+      // eslint-disable-next-line
+      console.log(this.$store.state.companyReviews)
     }
 }
 </script>

@@ -14,7 +14,8 @@ export default new Vuex.Store({
     state: {
         userProfile: {},
         companyId: "",
-        companyProfile: {}
+        companyProfile: {},
+        companyReviews: []
     },
     mutations: {
         setUserProfile(state, val) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         },
         setCompanyProfile(state, val) {
             state.companyProfile = val
+        },
+        setCompanyReviews(state, val) {
+            state.companyReviews = val
         }
     },
     actions: {
@@ -85,6 +89,24 @@ export default new Vuex.Store({
 
             // redirect to login view
             router.push(`/${this.state.companyId}`)
+        },
+        async getReviews({ commit }, companyId) {
+            let reviewsArr = [];
+            var reviewsRef = fb.reviewsCollection.where("company", "==", companyId);
+
+            reviewsRef.get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((review) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        reviewsArr.push(review.data())
+                    });
+                })
+                .catch((error) => {
+                    // eslint-disable-next-line
+                    console.log("Error getting documents: ", error);
+                });
+
+            commit('setCompanyReviews', reviewsArr)
         }
     }
 });
