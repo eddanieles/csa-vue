@@ -11,9 +11,9 @@
       <b-nav-item>
         <div class="d-md-down-none px-2">
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
-            <img class="rounded-circle" src="../../assets/people/a7.png" alt="..." />
+            <img class="rounded-circle" src="../../assets/people/profileIcon.jpeg" alt="..." />
           </span>
-          <span class="px-2">Philip Smith</span>
+          <span class="px-2">{{this.$store.state.userProfile.firstName}} {{this.$store.state.userProfile.lastName}}</span>
         </div>
       </b-nav-item>
       <b-nav-item>
