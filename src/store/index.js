@@ -96,9 +96,16 @@ export default new Vuex.Store({
 
             reviewsRef.get()
                 .then((querySnapshot) => {
-                    querySnapshot.forEach((review) => {
+                    querySnapshot.forEach(review => {
                         // doc.data() is never undefined for query doc snapshots
-                        reviewsArr.push(review.data())
+                        let parsedReviewed = review.data();
+
+                        var candidateRef = fb.candidatesCollection.doc(parsedReviewed.candidate);
+                        candidateRef.get().then(candidate => {
+                            parsedReviewed.candidateInfo = candidate.data();
+                        })
+
+                        reviewsArr.push(parsedReviewed)
                     });
                 })
                 .catch((error) => {

@@ -74,7 +74,7 @@ export default {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
     },
-    beforeMount () {
+    mounted() {
       this.$store.dispatch('getReviews', this.$route.params.id);
     }
 }
