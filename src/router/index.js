@@ -7,6 +7,7 @@ import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
 import Layout from '../components/Layout/Layout'
 import { auth } from '.././firebase'
+// import store from '.././store'
 
 Vue.use(VueRouter)
 
