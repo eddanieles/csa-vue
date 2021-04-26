@@ -219,6 +219,9 @@ export default {
             series
         };
         }
+    },
+    beforeCreate() {
+      console.log(`DashboardPage State: ${this.$store.state.companyId}`)
     }
 }
 </script>

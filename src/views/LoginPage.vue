@@ -68,19 +68,7 @@ export default {
   },
   created() {
     let companyId = this.$route.params.id;
-    var docRef = companiesCollection.doc(companyId);
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            this.$store.dispatch('assignCompany', companyId);
-        } else {
-            // doc.data() will be undefined in this case
-            // eslint-disable-next-line
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
+    this.$store.dispatch('assignCompany', companyId);
   },
 };
 </script>

@@ -32,6 +32,9 @@ export default new Vuex.Store({
             // sign user in
             const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
 
+            // eslint-disable-next-line
+            console.log(`Store State: ${this.state.companyId}`)
+
             // fetch user profile and set in state
             dispatch('fetchUserProfile', user)
         },
