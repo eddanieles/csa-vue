@@ -221,7 +221,8 @@ export default {
         }
     },
     beforeCreate() {
-      console.log(`DashboardPage State: ${this.$store.state.companyId}`)
+      let companyId = this.$route.params.id;
+      this.$store.dispatch('assignCompany', companyId);
     }
 }
 </script>
