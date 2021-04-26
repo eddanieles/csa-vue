@@ -18,7 +18,8 @@
       </b-nav-item>
       <b-nav-item>
         <div class="d-md-down-none px-2" @click="logout">
-          <i class="fi flaticon-power-1 px-3 mr-3" /> Log Out
+          Log Out
+          <i class="fi flaticon-power-1 px-3 mr-3" />
         </div>
       </b-nav-item>
     </b-nav>
