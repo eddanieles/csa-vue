@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-page">
+    {{this.reviews}}
     <h1 class="page-title">Candidates</h1>
     <b-row>
         <b-col xs="12">
@@ -54,6 +55,7 @@
 <script>
 import Widget from '@/components/Widget/Widget';
 import mock from './mock';
+import { reviewsCollection } from '@/firebase'
 
 export default {
     name: 'Candidates',
@@ -63,21 +65,25 @@ export default {
     data() {
         return {
             mock,
-            errorMessage: null
+            errorMessage: null,
+            reviews: []
         };
     },
     methods: {
-      
+      async getReviews() {
+          const docs = await reviewsCollection.where('company', '==', this.$route.params.id).get();
+          this.reviews = docs.docs.map(doc => {
+              return doc.data();
+          });
+      }
     },
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
     },
     mounted () {
-      this.$store.dispatch('getReviews', this.$route.params.id);
-
-      // eslint-disable-next-line
-      console.log(this.$store.state.companyReviews)
+      // this.$store.dispatch('getReviews', this.$route.params.id);
+      this.getReviews()
     }
 }
 </script>
