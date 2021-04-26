@@ -6,11 +6,8 @@
         @mouseleave="sidebarMouseLeave"
     >
       <header class="logo">
-        <router-link to="/app/dashboard"><span class="primary-word">Sing</span> <span class="secondary-word"> App</span></router-link>
+        <router-link to="dashboard"><span class="primary-word">{{this.$store.state.companyProfile.name}}</span></router-link>
       </header>
-      <h5 class="navTitle first">
-        APP
-      </h5>
       <ul class="nav">
         <NavLink
             :activeItem="activeItem"
