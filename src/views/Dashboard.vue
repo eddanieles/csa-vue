@@ -116,7 +116,6 @@
 </template>
 
 <script>
-import { auth } from '../firebase'
 import Widget from '@/components/Widget/Widget';
 import BigStat from './components/BigStat/BigStat';
 import mock from './mock';
@@ -220,11 +219,7 @@ export default {
             series
         };
         }
-    },
-    mounted() {
-        this.$store.dispatch('getAuthUserProfile', JSON.parse(JSON.stringify(auth.currentUser)))
-    },
-
+    }
 }
 </script>
 

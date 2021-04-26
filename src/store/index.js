@@ -43,29 +43,14 @@ export default new Vuex.Store({
             commit('setUserProfile', userProfile.data())
 
             // change route to dashboard
-            // eslint-disable-next-line
-            console.log(`User UID: ${user.uid}`)
             router.push(`/${this.state.companyId}/app/dashboard`)
         },
-        async getAuthUserProfile({}, user) {
-            // eslint-disable-next-line
-            console.log("auth.currentUser from usersCollection: ")
-            var authRef = fb.usersCollection.doc(user.uid)
-
+        async getAuthUserProfile({ commit }, user) {
             // fetch user profile
-            authRef.get()
-                .then((doc) => {
-                    if (doc.exists) {
-                        // eslint-disable-next-line
-                        console.log("Document data:", doc.data());
-                    } else {
-                        // doc.data() will be undefined in this case
-                        // eslint-disable-next-line
-                        console.log("No such document!");
-                    }
-                }).catch((error) => {
-                    console.log("Error getting document:", error);
-                });
+            var authRef = await fb.usersCollection.doc(user.uid).get()
+
+            // set user profile in state
+            commit('setUserProfile', authRef.data())
         },
         async logout({ commit }) {
             // log user out

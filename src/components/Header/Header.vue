@@ -28,6 +28,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import { auth } from '../../firebase'
 
 export default {
   name: 'Header',
@@ -61,6 +62,9 @@ export default {
     logout() {
       this.$store.dispatch('logout')
     },
+  },
+  beforeMount() {
+    this.$store.dispatch('getAuthUserProfile', JSON.parse(JSON.stringify(auth.currentUser)))
   }
 };
 </script>
