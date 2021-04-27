@@ -57,7 +57,6 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
-import mock from './mock';
 
 export default {
     name: 'Candidates',
@@ -66,7 +65,6 @@ export default {
     },
     data() {
         return {
-            mock,
             errorMessage: null,
             reviews: []
         };
