@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-page">
-    {{this.$store.state.companyReviews}}
+    {{this.reviews}}
     <h1 class="page-title">Candidates</h1>
     <b-row>
         <b-col xs="12">
@@ -25,7 +25,8 @@
                     v-for="row in this.$store.state.companyReviews"
                     :key="row.id"
                   >
-                    <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
+                    <td>{{getCandidateInfo(row.candidate) ? getCandidateInfo(row.candidate) : `getCandidateInfo(${row.candidate})`}}</td>
+                    <!-- <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td> -->
                     <td>{{row.candidateInfo ? row.candidateInfo.email : "Placeholder"}}</td>
                     <td>{{row.candidateInfo ? row.candidateInfo.phone : "Placeholder"}}</td>
                     <td>{{row.timeTakenMinutes}} minutes</td>
@@ -57,6 +58,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
+import { candidatesCollection } from '../firebase'
 
 export default {
     name: 'Candidates',
@@ -70,6 +72,12 @@ export default {
         };
     },
     methods: {
+      getCandidateInfo(candidateId) {
+        var candidateRef = candidatesCollection.doc(candidateId);
+          candidateRef.get().then(candidate => {
+              return candidate.data()
+          })
+      }
     },
     beforeCreate() {
       let companyId = this.$route.params.id;
@@ -77,6 +85,9 @@ export default {
     },
     mounted() {
       this.$store.dispatch('getReviews', this.$route.params.id);
+    },
+    beforeUpdate() {
+      this.reviews = this.$store.state.companyReviews;
     }
 }
 </script>
