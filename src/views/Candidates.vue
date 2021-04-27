@@ -14,32 +14,35 @@
                   <tr class="text-muted">
                     <th>NAME</th>
                     <th>EMAIL</th>
-                    <th>PRODUCT</th>
-                    <th>PRICE</th>
-                    <th>DATE</th>
-                    <th>CITY</th>
-                    <th>STATUS</th>
+                    <th>PHONE</th>
+                    <th>APPLICATION TIME</th>
+                    <th>EASY PROCESS</th>
+                    <th>APPROVE APPLICATION</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="row in mock.table"
+                    v-for="row in this.$store.state.companyReviews"
                     :key="row.id"
                   >
-                    <td>{{row.name}}</td>
-                    <td>{{row.email}}</td>
-                    <td>{{row.product}}</td>
-                    <td>{{row.price}}</td>
-                    <td>{{row.date}}</td>
-                    <td>{{row.city}}</td>
+                    <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
+                    <td>{{row.candidateInfo ? row.candidateInfo.email : "Placeholder"}}</td>
+                    <td>{{row.candidateInfo ? row.candidateInfo.phone : "Placeholder"}}</td>
+                    <td>{{row.timeTakenMinutes}} minutes</td>
                     <td>
                       <b-badge
-                        :variant="row.status === 'Pending'
-                          ? 'success'
-                          : row.status === 'Declined' ? 'danger' : 'info'"
+                        :variant="row.easy ? 'success' : 'info'"
                         pill
                       >
-                        {{row.status}}
+                        {{row.easy ? "Easy" : "Difficult"}}
+                      </b-badge>
+                    </td>
+                    <td>
+                      <b-badge
+                        :variant="row.approved ? 'success' : 'danger'"
+                        pill
+                      >
+                        {{row.approved ? "Approved" : "NOT Approved"}}
                       </b-badge>
                     </td>
                   </tr>
