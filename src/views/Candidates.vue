@@ -25,8 +25,7 @@
                     v-for="row in this.$store.state.companyReviews"
                     :key="row.id"
                   >
-                    <td>{{getCandidateInfo(row.candidate) ? getCandidateInfo(row.candidate) : `getCandidateInfo(${row.candidate})`}}</td>
-                    <!-- <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td> -->
+                    <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
                     <td>{{row.candidateInfo ? row.candidateInfo.email : "Placeholder"}}</td>
                     <td>{{row.candidateInfo ? row.candidateInfo.phone : "Placeholder"}}</td>
                     <td>{{row.timeTakenMinutes}} minutes</td>
@@ -77,24 +76,32 @@ export default {
     methods: {
       async getCandidateInfo(candidateId) {
         let candidateInfo;
-        var candidateRef = await candidatesCollection.doc(candidateId);
-        candidateRef.get().then(candidate => {
-            // eslint-disable-next-line
-            // console.log(candidate.data());
+        var candidateRef = candidatesCollection.doc(candidateId);
+        await candidateRef.get().then(candidate => {
             candidateInfo = candidate.data()
         })
+        // eslint-disable-next-line
+        // console.log(candidateInfo);
         return candidateInfo;
       }
     },
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
+
+      this.$store.dispatch('getReviews', companyId);
     },
-    mounted() {
-      this.$store.dispatch('getReviews', this.$route.params.id);
+    beforeMount() {
+      this.reviews = this.$store.state.companyReviews;
     },
     beforeUpdate() {
-      this.reviews = this.$store.state.companyReviews
+      this.reviews.map(review => {
+        this.getCandidateInfo(review.candidate).then(data => {
+          // eslint-disable-next-line
+          console.log(data)
+          review.candidateInfo = data;
+        })
+      })
     }
 }
 </script>
