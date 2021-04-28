@@ -108,9 +108,6 @@ export default new Vuex.Store({
                 });
 
             commit('setCompanyReviews', reviewsArr)
-        },
-        async updateCompanyReviews({ commit }, reviews) {
-            commit('setCompanyReviews', reviews)
         }
     }
 });
