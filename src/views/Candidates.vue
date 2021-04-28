@@ -58,7 +58,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
-import { candidatesCollection } from '../firebase'
+import { candidatesCollection } from '@/firebase'
 
 export default {
     name: 'Candidates',
@@ -71,12 +71,19 @@ export default {
             reviews: []
         };
     },
+    computed: {
+      
+    },
     methods: {
-      getCandidateInfo(candidateId) {
-        var candidateRef = candidatesCollection.doc(candidateId);
-          candidateRef.get().then(candidate => {
-              return candidate.data()
-          })
+      async getCandidateInfo(candidateId) {
+        let candidateInfo;
+        var candidateRef = await candidatesCollection.doc(candidateId);
+        candidateRef.get().then(candidate => {
+            // eslint-disable-next-line
+            // console.log(candidate.data());
+            candidateInfo = candidate.data()
+        })
+        return candidateInfo;
       }
     },
     beforeCreate() {
@@ -87,7 +94,7 @@ export default {
       this.$store.dispatch('getReviews', this.$route.params.id);
     },
     beforeUpdate() {
-      this.reviews = this.$store.state.companyReviews;
+      this.reviews = this.$store.state.companyReviews
     }
 }
 </script>
