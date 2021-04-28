@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="row in this.$store.state.companyReviews"
+                    v-for="row in reviews"
                     :key="row.id"
                   >
                     <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
@@ -67,7 +67,7 @@ export default {
     data() {
         return {
             errorMessage: null,
-            reviews: []
+            reviews: this.$store.state.companyReviews
         };
     },
     computed: {
@@ -92,7 +92,7 @@ export default {
       this.$store.dispatch('getReviews', companyId);
     },
     beforeMount() {
-      this.reviews = this.$store.state.companyReviews;
+      // this.reviews = this.$store.state.companyReviews;
     },
     mounted() {
       
@@ -105,6 +105,10 @@ export default {
           review.candidateInfo = data;
         })
       });
+
+    },
+    updated() {
+      this.$store.dispatch('updateCompanyReviews', this.reviews)
     }
 }
 </script>
