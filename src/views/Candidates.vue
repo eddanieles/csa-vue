@@ -94,6 +94,9 @@ export default {
     beforeMount() {
       this.reviews = this.$store.state.companyReviews;
     },
+    mounted() {
+      
+    },
     beforeUpdate() {
       this.reviews.map(review => {
         this.getCandidateInfo(review.candidate).then(data => {
@@ -101,7 +104,7 @@ export default {
           console.log(data)
           review.candidateInfo = data;
         })
-      })
+      });
     }
 }
 </script>
