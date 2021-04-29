@@ -92,7 +92,7 @@ export default {
           })
       })
       // eslint-disable-next-line
-      console.log(this.reviews)
+      // console.log(this.reviews);
     }
 }
 </script>
