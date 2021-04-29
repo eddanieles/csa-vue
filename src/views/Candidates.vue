@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-page">
-    {{reviews}}
     <h1 class="page-title">Candidates</h1>
     <b-row>
         <b-col xs="12">
@@ -22,7 +21,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="row in reviews"
+                    v-for="row in $store.state.companyReviews"
                     :key="row.id"
                   >
                     <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
@@ -57,42 +56,16 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
-import { candidatesCollection } from '@/firebase'
 
 export default {
     name: 'Candidates',
     components: {
         Widget
     },
-    computed: {
-      reviews() {
-        return this.$store.state.companyReviews;
-      }
-    },
-    methods: {
-      async getCandidateInfo(candidateId) {
-        var candidateInfo
-        var candidateRef = candidatesCollection.doc(candidateId);
-        await candidateRef.get().then(candidate => {
-            candidateInfo = candidate.data()
-        })
-        return candidateInfo
-      }
-    },
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
       this.$store.dispatch('getReviews', companyId);
-    },
-    beforeUpdate() {
-      let that = this;
-      this.reviews.map(review => {
-          that.getCandidateInfo(review.candidate).then(data => {
-            review.candidateInfo = data
-          })
-      })
-      // eslint-disable-next-line
-      // console.log(this.reviews);
     }
 }
 </script>
