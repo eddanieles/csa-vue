@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-page">
-    {{this.reviews}}
+    {{reviews}}
     <h1 class="page-title">Candidates</h1>
     <b-row>
         <b-col xs="12">
@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="row in this.$store.state.companyReviews"
+                    v-for="row in reviews"
                     :key="row.id"
                   >
                     <td>{{row.candidateInfo ? row.candidateInfo.firstName : "Placeholder"}} {{row.candidateInfo ? row.candidateInfo.lastName : "Placeholder"}}</td>
@@ -64,47 +64,35 @@ export default {
     components: {
         Widget
     },
-    data() {
-        return {
-            errorMessage: null,
-            reviews: []
-        };
-    },
     computed: {
-      
+      reviews() {
+        return this.$store.state.companyReviews;
+      }
     },
     methods: {
       async getCandidateInfo(candidateId) {
-        let candidateInfo;
+        var candidateInfo
         var candidateRef = candidatesCollection.doc(candidateId);
         await candidateRef.get().then(candidate => {
             candidateInfo = candidate.data()
         })
-        // eslint-disable-next-line
-        // console.log(candidateInfo);
-        return candidateInfo;
+        return candidateInfo
       }
     },
     beforeCreate() {
       let companyId = this.$route.params.id;
       this.$store.dispatch('assignCompany', companyId);
-
       this.$store.dispatch('getReviews', companyId);
     },
-    beforeMount() {
-      this.reviews = this.$store.state.companyReviews;
-    },
-    mounted() {
-      
-    },
     beforeUpdate() {
+      let that = this;
       this.reviews.map(review => {
-        this.getCandidateInfo(review.candidate).then(data => {
-          // eslint-disable-next-line
-          console.log(data)
-          review.candidateInfo = data;
-        })
-      });
+          that.getCandidateInfo(review.candidate).then(data => {
+            review.candidateInfo = data
+          })
+      })
+      // eslint-disable-next-line
+      console.log(this.reviews)
     }
 }
 </script>
