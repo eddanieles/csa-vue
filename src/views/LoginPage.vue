@@ -3,8 +3,10 @@
     <b-container>
       <h5 class="auth-logo">
         <i class="fa fa-circle text-primary"></i>
-        {{this.$store.state.companyProfile ? this.$store.state.companyProfile.name : "Wrong login link!"}}
+        {{this.$store.state.companyProfile ? "Welcome" : "Wrong login link!"}}
         <i class="fa fa-circle text-danger"></i>
+        <br>
+        <img v-bind:style="{height: '50px', marginTop: '10px'}" v-bind:src="`${this.$store.state.companyProfile.logo}`" alt="No image found"/>
       </h5>
 
       <div v-show="this.$store.state.companyProfile"> 

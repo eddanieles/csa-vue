@@ -12,7 +12,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Dashboard"
-            :link="`/${this.path}/dashboard`"
+            :link="`/${this.$store.state.companyId}/app/dashboard`"
             iconName="flaticon-database"
             index="dashboard"
             isHeader
@@ -20,7 +20,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Candidates"
-            :link="`/${this.path}/candidates`"
+            :link="`/${this.$store.state.companyId}/app/candidates`"
             iconName="flaticon-user"
             index="candidates"
             isHeader
@@ -28,7 +28,7 @@
         <NavLink
             :activeItem="activeItem"
             header="Social Causes"
-            :link="`/${this.path}/socialcauses`"
+            :link="`/${this.$store.state.companyId}/app/socialcauses`"
             iconName="flaticon-megaphone"
             index="socialcauses"
             isHeader
