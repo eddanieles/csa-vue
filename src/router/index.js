@@ -57,7 +57,11 @@ router.beforeEach((to, from, next) => {
 
     if (requiresAuth && !auth.currentUser) {
         next('/')
-    } else {
+    }
+    // else if (routerState.companyId != routerState.userProfile.company) {
+    //     next('/')
+    // } 
+    else {
         // eslint-disable-next-line
         console.log(routerState.companyId)
             // eslint-disable-next-line
