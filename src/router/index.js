@@ -7,7 +7,7 @@ import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
 import Layout from '../components/Layout/Layout'
 import { auth } from '.././firebase'
-import store from '.././store'
+import store from '.././store/index'
 
 Vue.use(VueRouter)
 
@@ -57,15 +57,17 @@ router.beforeEach((to, from, next) => {
 
     if (requiresAuth && !auth.currentUser) {
         next('/')
-    }
-    // else if (routerState.companyId != routerState.userProfile.company) {
-    //     next('/')
-    // } 
-    else {
+    } else {
+        if (routerState.companyId != routerState.userProfile.company) {
+            store.dispatch('logout')
+        }
+
         // eslint-disable-next-line
-        console.log(routerState.companyId)
+        console.log("routerState.companyId: ", routerState.companyId)
             // eslint-disable-next-line
-        console.log(routerState.userProfile.company)
+        console.log("routerState.userProfile.company: ", routerState.userProfile.company)
+            // eslint-disable-next-line
+        console.log("router.app: ", router.app)
         next()
     }
 })

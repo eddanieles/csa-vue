@@ -46,9 +46,8 @@ export default new Vuex.Store({
                         commit('setCompanyId', companyId)
                     } else {
                         // doc.data() will be undefined in this case
-                        commit('setCompanyProfile', null)
-                            // eslint-disable-next-line
-                        console.log("No such document!");
+                        // eslint-disable-next-line
+                        console.log("Error getting document:", error);
                     }
                 }).catch((error) => {
                     // eslint-disable-next-line
