@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import layout from './layout'
 import * as fb from '../firebase'
 import router from '../router/index'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     modules: {
         layout,
     },
+    plugins: [createPersistedState()],
     state: {
         userProfile: {},
         companyId: "",

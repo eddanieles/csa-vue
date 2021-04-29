@@ -7,7 +7,7 @@ import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
 import Layout from '../components/Layout/Layout'
 import { auth } from '.././firebase'
-// import store from '.././store'
+import store from '.././store'
 
 Vue.use(VueRouter)
 
@@ -52,17 +52,16 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    let routerState = JSON.parse(JSON.stringify(store.state))
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 
     if (requiresAuth && !auth.currentUser) {
         next('/')
     } else {
-        // // eslint-disable-next-line
-        // console.log(store.state)
-        //     // eslint-disable-next-line
-        // console.log(store.state.companyId)
-        //     // eslint-disable-next-line
-        // console.log(store.state.userProfile.company)
+        // eslint-disable-next-line
+        console.log(routerState.companyId)
+            // eslint-disable-next-line
+        console.log(routerState.userProfile.company)
         next()
     }
 })
