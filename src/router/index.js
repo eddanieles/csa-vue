@@ -7,7 +7,6 @@ import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
 import Layout from '../components/Layout/Layout'
 import { auth } from '.././firebase'
-// import store from '.././store'
 
 Vue.use(VueRouter)
 
@@ -57,12 +56,6 @@ router.beforeEach((to, from, next) => {
     if (requiresAuth && !auth.currentUser) {
         next('/')
     } else {
-        // // eslint-disable-next-line
-        // console.log(store.state)
-        //     // eslint-disable-next-line
-        // console.log(store.state.companyId)
-        //     // eslint-disable-next-line
-        // console.log(store.state.userProfile.company)
         next()
     }
 })

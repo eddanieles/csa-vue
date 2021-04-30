@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import layout from './layout'
 import * as fb from '../firebase'
 import router from '../router/index'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     modules: {
         layout,
     },
+    plugins: [createPersistedState()],
     state: {
         userProfile: {},
         companyId: "",
@@ -44,9 +46,8 @@ export default new Vuex.Store({
                         commit('setCompanyId', companyId)
                     } else {
                         // doc.data() will be undefined in this case
-                        commit('setCompanyProfile', null)
-                            // eslint-disable-next-line
-                        console.log("No such document!");
+                        // eslint-disable-next-line
+                        console.log("Error getting document:", error);
                     }
                 }).catch((error) => {
                     // eslint-disable-next-line
