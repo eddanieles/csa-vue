@@ -7,7 +7,6 @@ import SocialCauses from '../views/SocialCauses'
 import HelloWorld from '../components/HelloWorld'
 import Layout from '../components/Layout/Layout'
 import { auth } from '.././firebase'
-import store from '.././store/index'
 
 Vue.use(VueRouter)
 
@@ -52,15 +51,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    let routerState = JSON.parse(JSON.stringify(store.state))
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
 
     if (requiresAuth && !auth.currentUser) {
         next('/')
     } else {
-        if (routerState.companyId != routerState.userProfile.company) {
-            store.dispatch('logout')
-        }
         next()
     }
 })

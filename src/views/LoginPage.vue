@@ -74,6 +74,6 @@ export default {
   beforeCreate() {
     let companyId = this.$route.params.id;
     this.$store.dispatch('assignCompany', companyId);
-  },
+  }
 };
 </script>
