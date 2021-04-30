@@ -61,13 +61,6 @@ router.beforeEach((to, from, next) => {
         if (routerState.companyId != routerState.userProfile.company) {
             store.dispatch('logout')
         }
-
-        // eslint-disable-next-line
-        console.log("routerState.companyId: ", routerState.companyId)
-            // eslint-disable-next-line
-        console.log("routerState.userProfile.company: ", routerState.userProfile.company)
-            // eslint-disable-next-line
-        console.log("router.app: ", router.app)
         next()
     }
 })
