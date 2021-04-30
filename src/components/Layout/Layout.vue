@@ -1,18 +1,23 @@
 <template>
-<div :class="[{root: true, sidebarClose, sidebarStatic}, 'sing-dashboard']">
-  <Sidebar />
-  <div class="wrap">
-    <Header />
-    <v-touch class="content" @swipe="handleSwipe" :swipe-options="{direction: 'horizontal'}">
-      <transition name="router-animation">
-        <router-view />
-      </transition>
-      <footer class="contentFooter">
-        Sing App Vue Dashboard Free Template - Made by <a href="https://flatlogic.com" rel="nofollow noopener noreferrer" target="_blank">Flatlogic</a>
-      </footer>
-    </v-touch>
+  <div :class="[{root: true, sidebarClose, sidebarStatic}, 'sing-dashboard']" >
+    <div v-if="this.$route.params.id == this.$store.state.userProfile.company">
+      <Sidebar />
+        <div class="wrap">
+          <Header />
+          <v-touch class="content" @swipe="handleSwipe" :swipe-options="{direction: 'horizontal'}">
+            <transition name="router-animation">
+              <router-view />
+            </transition>
+            <footer class="contentFooter">
+              Sing App Vue Dashboard Free Template - Made by <a href="https://flatlogic.com" rel="nofollow noopener noreferrer" target="_blank">Flatlogic</a>
+            </footer>
+          </v-touch>
+        </div>
+    </div>
+    <div v-else>
+      You do not have access to this page
+    </div>
   </div>
-</div>
 </template>
 
 <script>
