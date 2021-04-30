@@ -17,10 +17,16 @@
         </div>
       </b-nav-item>
       <b-nav-item>
-        <div class="d-md-down-none px-2" @click="logout">
+        <b-nav-item-dropdown id="v-step-2" class="settingsDropdown d-sm-down-none" no-caret right>
+        <template slot="button-content">
+          <i class='fi flaticon-settings-10 px-2' />
+        </template>
+        <b-dropdown-item>My Account<i class='fi flaticon-person px-3 mr-3' /></b-dropdown-item>
+        <b-dropdown-item-button @click="logout">
           Log Out
           <i class="fi flaticon-power-1 px-3 mr-3" />
-        </div>
+        </b-dropdown-item-button>
+        </b-nav-item-dropdown>
       </b-nav-item>
     </b-nav>
   </b-navbar>
