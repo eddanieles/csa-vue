@@ -75,55 +75,21 @@ export default {
       auth.signInWithPopup(googleProvider)
         .then((result) => {
           /** @type {firebase.auth.OAuthCredential} */
-          var credential = result.credential;
-
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = credential.accessToken;
-          // eslint-disable-next-line
-          console.log("token: ", token);
-          // The signed-in user info.
           var user = result.user;
-          // eslint-disable-next-line
-          console.log("user: ", user);
           this.$store.dispatch('fetchUserProfile', user)
           // ...
         }).catch((error) => {
           // Handle Errors here.
-          var errorCode = error.code;
-          // eslint-disable-next-line
-          console.log("errorCode: ", errorCode);
-          var errorMessage = error.message;
            // eslint-disable-next-line
-          console.log("errorMessage: ", errorMessage);
-          // The email of the user's account used.
-          var email = error.email;
-           // eslint-disable-next-line
-          console.log("email: ", email);
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-           // eslint-disable-next-line
-          console.log("credential: ", credential);
+          console.log("error: ", error);
           // ...
         });
     },
     microsoftLogin() {
       auth.signInWithPopup(microsoftProvider)
         .then((result) => {
-          // IdP data available in result.additionalUserInfo.profile.
-          // ...
-
           /** @type {firebase.auth.OAuthCredential} */
-          var credential = result.credential;
-          // eslint-disable-next-line
-          console.log("credential: ", credential);
-          // OAuth access and id tokens can also be retrieved:
-          var accessToken = credential.accessToken;
-          var idToken = credential.idToken;
-           // eslint-disable-next-line
-          console.log("accessToken: ", accessToken);
-           // eslint-disable-next-line
-          console.log("idToken: ", idToken);
-          this.$store.dispatch('fetchUserProfile', result.additionalUserInfo.profile)
+          this.$store.dispatch('fetchUserProfile', result.user)
         })
         .catch((error) => {
           // Handle error.
