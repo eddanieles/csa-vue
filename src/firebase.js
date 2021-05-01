@@ -16,6 +16,7 @@ firebase.initializeApp(firebaseConfig)
 // utils
 const db = firebase.firestore()
 const auth = firebase.auth()
+var googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // collection references
 const usersCollection = db.collection('users')
@@ -27,6 +28,7 @@ const reviewsCollection = db.collection('reviews')
 export {
     db,
     auth,
+    googleProvider,
     usersCollection,
     companiesCollection,
     candidatesCollection,

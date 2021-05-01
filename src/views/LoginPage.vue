@@ -27,7 +27,7 @@
             <b-button type="submit" size="sm" class="auth-btn mb-3 " variant="inverse">Login</b-button>
             <p class="widget-auth-info">or sign in with</p>
             <div class="social-buttons">
-              <b-button variant="primary" class="social-button mb-2">
+              <b-button variant="primary" class="social-button mb-2" @click="googleLogin">
                 <i class="social-icon social-google"></i>
                 <p class="social-text">GOOGLE</p>
               </b-button>
@@ -53,6 +53,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
+import { googleProvider, auth } from '../firebase'
 
 export default {
   name: 'LoginPage',
@@ -70,6 +71,42 @@ export default {
           password: that.$refs.password.value
       })
     },
+    googleLogin() {
+      auth
+        .signInWithPopup(googleProvider)
+        .then((result) => {
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential;
+
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = credential.accessToken;
+          // eslint-disable-next-line
+          console.log("token: ", token);
+          // The signed-in user info.
+          var user = result.user;
+          // eslint-disable-next-line
+          console.log("user: ", user);
+          this.$store.dispatch('fetchUserProfile', user)
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          // eslint-disable-next-line
+          console.log("errorCode: ", errorCode);
+          var errorMessage = error.message;
+           // eslint-disable-next-line
+          console.log("errorMessage: ", errorMessage);
+          // The email of the user's account used.
+          var email = error.email;
+           // eslint-disable-next-line
+          console.log("email: ", email);
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+           // eslint-disable-next-line
+          console.log("credential: ", credential);
+          // ...
+        });
+    }
   },
   beforeCreate() {
     let companyId = this.$route.params.id;
