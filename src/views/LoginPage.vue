@@ -27,11 +27,11 @@
             <b-button type="submit" size="sm" class="auth-btn mb-3 " variant="inverse">Login</b-button>
             <p class="widget-auth-info">or sign in with</p>
             <div class="social-buttons">
-              <b-button variant="primary" class="social-button mb-2">
+              <b-button variant="primary" class="social-button mb-2" @click="googleLogin">
                 <i class="social-icon social-google"></i>
                 <p class="social-text">GOOGLE</p>
               </b-button>
-              <b-button variant="success" class="social-button">
+              <b-button variant="success" class="social-button" @click="microsoftLogin">
                 <i class="social-icon social-microsoft"></i>
                 <p class="social-text">MICROSOFT</p>
               </b-button>
@@ -53,6 +53,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
+import { googleProvider, microsoftProvider, auth } from '../firebase'
 
 export default {
   name: 'LoginPage',
@@ -70,6 +71,32 @@ export default {
           password: that.$refs.password.value
       })
     },
+    googleLogin() {
+      auth.signInWithPopup(googleProvider)
+        .then((result) => {
+          /** @type {firebase.auth.OAuthCredential} */
+          var user = result.user;
+          this.$store.dispatch('fetchUserProfile', user)
+          // ...
+        }).catch((error) => {
+          // Handle Errors here.
+           // eslint-disable-next-line
+          console.log("error: ", error);
+          // ...
+        });
+    },
+    microsoftLogin() {
+      auth.signInWithPopup(microsoftProvider)
+        .then((result) => {
+          /** @type {firebase.auth.OAuthCredential} */
+          this.$store.dispatch('fetchUserProfile', result.user)
+        })
+        .catch((error) => {
+          // Handle error.
+          // eslint-disable-next-line
+          console.log("error: ", error);
+        });
+    }
   },
   beforeCreate() {
     let companyId = this.$route.params.id;
