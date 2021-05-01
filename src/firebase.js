@@ -17,6 +17,7 @@ firebase.initializeApp(firebaseConfig)
 const db = firebase.firestore()
 const auth = firebase.auth()
 var googleProvider = new firebase.auth.GoogleAuthProvider();
+var microsoftProvider = new firebase.auth.OAuthProvider('microsoft.com');
 
 // collection references
 const usersCollection = db.collection('users')
@@ -29,6 +30,7 @@ export {
     db,
     auth,
     googleProvider,
+    microsoftProvider,
     usersCollection,
     companiesCollection,
     candidatesCollection,

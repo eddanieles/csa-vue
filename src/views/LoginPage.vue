@@ -31,7 +31,7 @@
                 <i class="social-icon social-google"></i>
                 <p class="social-text">GOOGLE</p>
               </b-button>
-              <b-button variant="success" class="social-button">
+              <b-button variant="success" class="social-button" @click="microsoftLogin">
                 <i class="social-icon social-microsoft"></i>
                 <p class="social-text">MICROSOFT</p>
               </b-button>
@@ -53,7 +53,7 @@
 
 <script>
 import Widget from '@/components/Widget/Widget';
-import { googleProvider, auth } from '../firebase'
+import { googleProvider, microsoftProvider, auth } from '../firebase'
 
 export default {
   name: 'LoginPage',
@@ -72,8 +72,7 @@ export default {
       })
     },
     googleLogin() {
-      auth
-        .signInWithPopup(googleProvider)
+      auth.signInWithPopup(googleProvider)
         .then((result) => {
           /** @type {firebase.auth.OAuthCredential} */
           var credential = result.credential;
@@ -105,6 +104,31 @@ export default {
            // eslint-disable-next-line
           console.log("credential: ", credential);
           // ...
+        });
+    },
+    microsoftLogin() {
+      auth.signInWithPopup(microsoftProvider)
+        .then((result) => {
+          // IdP data available in result.additionalUserInfo.profile.
+          // ...
+
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential;
+          // eslint-disable-next-line
+          console.log("credential: ", credential);
+          // OAuth access and id tokens can also be retrieved:
+          var accessToken = credential.accessToken;
+          var idToken = credential.idToken;
+           // eslint-disable-next-line
+          console.log("accessToken: ", accessToken);
+           // eslint-disable-next-line
+          console.log("idToken: ", idToken);
+          this.$store.dispatch('fetchUserProfile', result.additionalUserInfo.profile)
+        })
+        .catch((error) => {
+          // Handle error.
+          // eslint-disable-next-line
+          console.log("error: ", error);
         });
     }
   },
