@@ -100,8 +100,10 @@ export default new Vuex.Store({
                     querySnapshot.forEach(async review => {
                         // doc.data() is never undefined for query doc snapshots
                         let parsedReviewed = review.data();
+                        parsedReviewed.id = review.id;
                         await fb.candidatesCollection.doc(parsedReviewed.candidate).get().then(data => {
-                            parsedReviewed.candidateInfo = data.data()
+                            parsedReviewed.candidateInfo = data.data();
+                            parsedReviewed.candidateInfo.id = data.id;
                         })
                         reviewsArr.push(parsedReviewed)
                     });
@@ -111,6 +113,8 @@ export default new Vuex.Store({
                     console.log("Error getting documents: ", error);
                 });
 
+            // eslint-disable-next-line
+            console.log("Reviews: ", reviewsArr);
             commit('setCompanyReviews', reviewsArr)
         }
     }
